@@ -58,21 +58,32 @@ class ProductResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                //
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
-    }
+        ->columns([
+            Tables\Columns\TextColumn::make('name')
+                ->label('Product')
+                ->searchable()
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('category.name')
+                ->label('Category')
+                ->sortable(),
+
+            Tables\Columns\TextColumn::make('price')
+                ->label('Price')
+                ->money('INR'),
+
+            Tables\Columns\ToggleColumn::make('is_active')
+                ->label('Active'),
+
+            Tables\Columns\TextColumn::make('created_at')
+                ->label('Created')
+                ->date('d M Y'),
+        ])
+        ->defaultSort('created_at', 'desc')
+        ->actions([
+            Tables\Actions\EditAction::make(),
+        ]);
+}
 
     public static function getRelations(): array
     {
