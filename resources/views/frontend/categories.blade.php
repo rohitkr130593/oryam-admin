@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ $category->name }} | ORYAM</title>
+    <title>Categories | ORYAM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body { font-family: Arial; background:#f8fafc; margin:0; }
@@ -13,25 +13,24 @@
         }
         .card {
             background:#fff;
-            padding:15px;
+            padding:18px;
             border-radius:10px;
-            box-shadow:0 2px 8px rgba(0,0,0,.1);
+            box-shadow:0 2px 8px rgba(0,0,0,.08);
+            text-align:center;
         }
         a { text-decoration:none; color:inherit; }
-        .price { color:#16a34a; font-weight:bold; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>{{ $category->name }}</h1>
+    <h1>All Categories</h1>
 
     <div class="grid">
-        @foreach($category->products as $product)
-            <a href="{{ url('/product/'.$product->slug) }}">
+        @foreach($categories as $category)
+            <a href="{{ url('/categories/'.$category->slug) }}">
                 <div class="card">
-                    <h3>{{ $product->name }}</h3>
-                    <div class="price">₹{{ $product->price }}</div>
+                    <h3>{{ $category->name }}</h3>
                 </div>
             </a>
         @endforeach
