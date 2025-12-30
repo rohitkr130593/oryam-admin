@@ -9,16 +9,15 @@ Route::get('/', function () {
 
 Route::get('/categories/{slug}', function ($slug) {
     $category = Category::where('slug', $slug)
-        ->where('status', 1)
         ->with('products')
         ->firstOrFail();
 
     return view('frontend.category', compact('category'));
 });
 
+
 Route::get('/product/{slug}', function ($slug) {
     $product = Product::where('slug', $slug)
-        ->where('status', 1)
         ->firstOrFail();
 
     return view('frontend.product', compact('product'));
