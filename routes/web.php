@@ -3,17 +3,13 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Product;
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/', function () {
     return view('coming-soon');
 });
 
 Route::get('/categories/{slug}', function ($slug) {
     $category = Category::where('slug', $slug)
-        ->where('is_active', 1)
+        ->where('status', 1)
         ->with('products')
         ->firstOrFail();
 
@@ -22,7 +18,7 @@ Route::get('/categories/{slug}', function ($slug) {
 
 Route::get('/product/{slug}', function ($slug) {
     $product = Product::where('slug', $slug)
-        ->where('is_active', 1)
+        ->where('status', 1)
         ->firstOrFail();
 
     return view('frontend.product', compact('product'));
