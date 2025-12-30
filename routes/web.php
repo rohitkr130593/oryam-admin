@@ -3,6 +3,10 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Category;
 use App\Models\Product;
 
+Route::get('/test', function () {
+    return 'ROUTE OK';
+});
+
 Route::get('/', function () {
     return view('coming-soon');
 });
